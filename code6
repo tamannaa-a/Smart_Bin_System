@@ -1,0 +1,82 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+// Pin Definitions
+#define TRIG_PIN 9      // Ultrasonic Sensor TRIG pin
+#define ECHO_PIN 10     // Ultrasonic Sensor ECHO pin
+#define BUZZER_PIN 6    // Buzzer pin
+#define LED_PIN 7       // LED pin
+
+// OLED Display Setup
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+void setup() {
+    Serial.begin(9600);    // Start Serial Monitor
+    pinMode(TRIG_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+    pinMode(BUZZER_PIN, OUTPUT);
+    pinMode(LED_PIN, OUTPUT);
+
+    // Initialize OLED Display
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+        Serial.println(F("SSD1306 allocation failed"));
+        for (;;);
+    }
+    display.clearDisplay();
+}
+
+void loop() {
+    int distance = getBinFillLevel();
+    int fillPercentage = map(distance, 2, 20, 100, 0); // Map 2cm (Full) to 20cm (Empty)
+
+    Serial.print("Bin Fill Level: ");
+    Serial.print(fillPercentage);
+    Serial.println("%");
+
+    displayBinLevel(fillPercentage);
+    
+    if (fillPercentage >= 80) {
+        triggerAlert();
+    } else {
+        digitalWrite(LED_PIN, LOW);
+        digitalWrite(BUZZER_PIN, LOW);
+    }
+
+    delay(2000); // Check bin level every 2 seconds
+}
+
+// Function to get bin fill level using Ultrasonic Sensor
+int getBinFillLevel() {
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+    int duration = pulseIn(ECHO_PIN, HIGH);
+    int distance = duration * 0.034 / 2; // Convert to cm
+    return distance;
+}
+
+// Function to display bin fill level on OLED
+void displayBinLevel(int fillPercentage) {
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(WHITE);
+    display.setCursor(10, 20);
+    display.print("Bin: ");
+    display.print(fillPercentage);
+    display.print("%");
+    display.display();
+}
+
+// Function to trigger alert when bin is full
+void triggerAlert() {
+    Serial.println("ALERT: Bin Full!");
+    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(1000);
+    digitalWrite(BUZZER_PIN, LOW);
+}
