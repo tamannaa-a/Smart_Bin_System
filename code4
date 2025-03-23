@@ -1,0 +1,27 @@
+% Define number of bins
+numBins = 10; % ✅ Make sure numBins is defined
+
+% Generate random bin fill levels (0 to 100%)
+binLevel = randi([0, 100], 1, numBins); % ✅ Ensure binLevel is created
+
+% Define alert threshold (80%)
+alertThreshold = 80;
+alerts = binLevel >= alertThreshold; % ✅ Generate alerts
+
+% Display results
+disp("Bin Fill Levels: ");
+disp(binLevel);
+
+disp("Alerts (1 = Bin Full, 0 = Bin OK): ");
+disp(alerts);
+
+% ✅ Ensure binLevel is defined before plotting
+figure;
+bar(binLevel, 'b'); % Plot bin levels in blue
+hold on;
+bar(alerts * 100, 'r'); % Highlight full bins in red
+xlabel("Bin ID");
+ylabel("Fill Level (%)");
+title("Smart Bin Monitoring System");
+legend("Bin Fill Level", "Full Alert");
+grid on;
