@@ -1,0 +1,27 @@
+% Define LoRa parameters
+sf = 7; % Spreading Factor (7-12)
+bw = 125e3; % Bandwidth in Hz
+symbolRate = bw / (2^sf); % Symbol rate
+
+% Generate dummy binary data (random 0s and 1s)
+data = randi([0 1], 1, 100);
+
+% Simulate LoRa modulation using chirp signal
+Fs = 1e6;  % Sampling frequency (1 MHz)
+T = 1 / symbolRate; % Symbol duration
+t = linspace(0, T, Fs*T); % Time vector for one symbol
+
+% Generate upchirp (LoRa symbol)
+upchirp = exp(1j * pi * (bw / T) * t.^2);
+
+% Modulate data (use upchirp for 1, downchirp for 0)
+modulatedSignal = [];
+for bit = data
+    if bit == 1
+        modulatedSignal = [modulatedSignal, upchirp]; % Append upchirp
+    else
+        modulatedSignal = [modulatedSignal, conj(upchirp)]; % Append downchirp
+    end
+end
+
+disp("LoRa Modulated Signal Generated");
