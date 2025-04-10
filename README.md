@@ -14,8 +14,8 @@ How It Works
 - Otherwise, it shows: `Bin OK`
 
 Simulation Details
-1] Generates 10 readings
-2] 1-second delay between each reading using delay(1000)
+1] Generates 10 readings.
+2] 1-second delay between each reading using delay(1000).
 
 Tools:
 TinkerCad,
