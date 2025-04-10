@@ -4,11 +4,11 @@ disp(binLevel);
 disp("Alerts (1 = Bin Full, 0 = Bin OK): ");
 disp(alerts);
 
-% ✅ Ensure numBins is defined before the loop
+% Ensure numBins is defined before the loop
 for i = 1:numBins
     if alerts(i)
-        fprintf("🚨 Alert: Bin %d is Full! Maintenance Required.\n", i);
+        fprintf(" Alert: Bin %d is Full! Maintenance Required.\n", i);
     else
-        fprintf("✅ Bin %d is OK.\n", i);
+        fprintf(" Bin %d is OK.\n", i);
     end
 end
