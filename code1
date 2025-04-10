@@ -4,8 +4,8 @@ binData = [binLevel; alerts]; % Combine bin levels & alerts
 % Simulate Network Server Processing
 for i = 1:numBins
     if alerts(i)
-        fprintf("🚨 Alert: Bin %d is Full! Maintenance Required.\n", i);
+        fprintf(" Alert: Bin %d is Full! Maintenance Required.\n", i);
     else
-        fprintf("✅ Bin %d is OK.\n", i);
+        fprintf(" Bin %d is OK.\n", i);
     end
 end
