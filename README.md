@@ -18,9 +18,11 @@ Simulation Loop:
 * Else → Bin OK
 
 🔊 Buzzer Activation:
+
 Buzzer triggers when bin is full to notify for immediate attention.
 
 🧪 Simulation Tools
+
 This project has been simulated and visualized using the following tools:
 
 * TinkerCad-	Circuit Simulation & Visualization
@@ -29,7 +31,8 @@ This project has been simulated and visualized using the following tools:
 * MATLAB-	Data Visualization & Analysis (optional extension)
 
 🛠️ Setup Instructions
+
 Clone this repository:
-* git clone https://github.com/your-username/smart-bin-system.git
+* git clone https://github.com/tamannaa-1/smart_bin_system.git
 * Open the project in Arduino IDE or upload it to Wokwi / TinkerCad.
 * Simulate the circuit and monitor the output via Serial Monitor.
