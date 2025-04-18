@@ -35,9 +35,4 @@ This project has been simulated and visualized using the following tools:
 * Arduino IDE-	Code Development & Serial Monitoring
 * MATLAB-	Data Visualization & Analysis (optional extension)
 
-🛠️ Setup Instructions
 
-Clone this repository:
-* git clone https://github.com/tamannaa-1/smart_bin_system.git
-* Open the project in Arduino IDE or upload it to Wokwi / TinkerCad.
-* Simulate the circuit and monitor the output via Serial Monitor.
